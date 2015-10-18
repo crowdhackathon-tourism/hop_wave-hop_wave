@@ -1,0 +1,86 @@
+<ion-nav-bar id="search">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view id="search">
+    <ion-content padding="true" scroll="true" class="has-header">
+        <img id="logo" src="img/log.png">
+        <div class="spacer" style="width: 300px; height: 3px;"></div>
+        <hr class="hr1">
+        <div>
+            <p style="color:#307A8E; text-align: center;">
+                {{"pickyour" | translate }} <strong>{{"startingpoint" | translate }}</strong> and the <strong>day</strong> you want to travel:
+            </p>
+        </div>
+
+        <div style="padding-bottom:20px">
+            <div id="startingPointsList" style="" class="list list-inset">
+                <label class="item item-input item-select">
+                    <select style="padding-left: 0px; padding-right: 0px; position:inherit">
+                        <option selected>{{ "kos" | translate }}</option>
+                        <option disabled>{{ "nisiros" | translate}}</option>
+                        <option disabled>{{ "pserimos" | translate}}</option>
+                        <option disabled>{{ "kalimnos" | translate }}</option>
+                        <option disabled>Bodrum</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <button class="button-icon icon ion-calendar" style="color:#fff" ng-click="showDatePicker()"></button>
+            </div>
+        </div>
+
+        <div id="searchButtonBar" class="button-bar" style="height:50px">
+            <a class="button button-icon icon" ng-click="slideTo(0)"><img width="40px" src="img/Hoparound.png"></a>
+            <a class="button button-icon icon" ng-click="slideTo(1)"><img width="40px" src="img/Hopto.png"></a>
+            <a class="button button-icon icon" ng-click="slideTo(2)"><img width="40px" src="img/Hopaway.png"></a>
+        </div>
+
+        <div left-buttons="leftButtons" right-buttons="rightButtons">
+            <div class="left">
+                <button style="color:#fff" class="button button-positive button-clear no-animation icon ion-chevron-left" ng-click="" ng-if="!slideIndex">
+                </button>
+                <button style="color:#fff" class="button button-positive button-clear no-animation icon ion-chevron-left" ng-click="previous()" ng-if="slideIndex > 0">
+                </button>
+            </div>
+            <div class="right">
+                <button style="color:#fff" class="button button-positive button-clear no-animation icon ion-chevron-right" ng-click="next()" ng-if="!slideIndex">
+                </button>
+                <button style="color:#fff" class="button button-positive button-clear no-animation icon ion-chevron-right" ng-click="next()" ng-if="slideIndex>0">
+                </button>
+            </div>
+
+            <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
+                <ion-slide>
+                    <div id="hoparound" class="hopImageDiv">
+                        <button class="button-icon" ng-click="goToResults()">
+                            <img src="img/Hoparound.png">
+                        </button>
+                    </div>
+                    <p class="optionTitle" style="width:110px">Hop Around</p>
+                    <p>{{ "hoparound" | translate }}</p>
+                </ion-slide>
+                <ion-slide>
+                    <div id="hopaway" class="hopImageDiv">
+                        <button class="button-icon" ng-click="goToAway()">
+                            <img src="img/Hopaway1.png">
+                        </button>
+                    </div>
+                    <p class="optionTitle" style="width:95px">Hop Away</p>
+                    <p>{{ "hopaway" | translate }}</p>
+                </ion-slide>
+                <ion-slide>
+                    <div id="hopto" class="hopImageDiv">
+                        <a>
+                            <img src="img/Hopto.png">
+                        </a>
+                    </div>
+                    <p class="optionTitle" style="width:80px; margin-top:-28px; color: #757575">Hop To</p>
+                    <p>{{ "hopto" | translate }} </p>
+                    <p class="optionDesc2">{{"beta" | translate}}</p>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+    </ion-content>
+</ion-view>

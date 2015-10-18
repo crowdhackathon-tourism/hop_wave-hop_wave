@@ -1,0 +1,105 @@
+<ion-nav-bar>
+    <ion-nav-buttons side="left">
+        <a class="button button-clear button-dark" href="#/trip/results"><i class="ion-android-arrow-back"></i> {{"back" | translate}}</a>
+        <h1 class="title" style="text-align: center !important">{{ "tripdetails" | translate}}</h1>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-view id="trip-details">
+    <ion-content class="has-header">
+        <div class="list">
+            <div class="item" style="padding:10px 8px 0px 8px">
+                <img src={{trip.boat_thumbnail_image}} style="border-radius: 100%; width: 100px; height: 12-px; margin-left: auto; display: block; margin-right: auto;">
+
+                <h2 ng-if="getLanguage()" style="text-align:center; padding-top: 8px; white-space: normal;">{{trip.en.route_title}}</h2>
+                <h2 ng-if="!getLanguage()" style="text-align:center; padding-top: 8px; white-space: normal;">{{trip.gr.route_title}}</h2>
+
+                <p ng-if="getLanguage()" style="text-align:center">{{trip.boat_name}}</p>
+            </div>
+
+            <div ng-controller="TripDetailsSlider">
+                <div class="button-bar button-full" style="margin-bottom: -10px">
+                    <a ng-click="slideTo(0)" class="button button-stable button-block icon ion-ios-information-outline button-full"></a>
+                    <a ng-click="slideTo(1)" class="button button-stable button-block icon ion-map button-full"></a>
+                    <a ng-click="slideTo(2)" class="button button-stable button-block icon ion-images button-full"></a>
+                </div>
+                <ion-slide-box ng-init="disableSwipe()" on-slide-changed="slideChanged(index)" show-pager="false" class="modalButtonsSlide">
+                    <ion-slide>
+                        <ul class="cbp_tmtimeline">
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-map"></i>
+                                <div class="cbp_tmlabel">
+                                    <p ng-if="getLanguage()">{{trip.en.route_title}}</p>
+                                    <p ng-if="!getLanguage()">{{trip.gr.route_title}}</p>
+                                </div>
+                            </li>
+                            <br>
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-ios-time-outline"></i>
+                                <div class="cbp_tmlabel">
+                                    <p ng-if="getLanguage()">Leave at {{trip.route_time_departure}}</p>
+                                    <p ng-if="getLanguage()">Be back at {{trip.route_time_arrival}}</p>
+
+                                    <p ng-if="!getLanguage()">Αποχώρηση στις {{trip.route_time_departure}}</p>
+                                    <p ng-if="!getLanguage()">Επιστροφή στις {{trip.route_time_arrival}}</p>
+                                </div>
+                            </li>
+
+                            <br>
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-calendar"></i>
+                                <div class="cbp_tmlabel">
+                                    <p>{{date}}</p>
+                                </div>
+                            </li>
+                            <br>
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-android-boat"></i>
+                                <div class="cbp_tmlabel">
+                                    <p ng-if="getLanguage()">{{trip.boat_type}}</p>
+                                </div>
+                            </li>
+                            <br>
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-social-euro"></i>
+                                <div class="cbp_tmlabel">
+                                    <p ng-if="getLanguage()">{{trip.en.boat_trip_price_details}}</p>
+                                    <p ng-if="!getLanguage()">{{trip.gr.boat_trip_price_details}}</p>
+                                </div>
+                            </li>
+                            <br>
+                            <li class="">
+                                <i class="cbp_tmicon icon ion-ios-information-outline"></i>
+                                <div class="cbp_tmlabel">
+                                    <p ng-if="getLanguage()">{{trip.en.boat_trip_description}}</p>
+                                    <p ng-if="!getLanguage()">{{trip.gr.boat_trip_description}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                            <ui-gmap-marker coords="marker" idkey="1">
+                            </ui-gmap-marker></ui-gmap-google-map>
+                    </ion-slide>
+
+                    <ion-slide id="TripImagesSlider" ng-controller="TripImagesSliderCtrl" style="padding-top:8px">
+                        <ion-spinner id="imageSpinner"></ion-spinner>
+                        <div><a class="item item-list-detail">
+                            <img class="col col-33 image-list-thumb" ng-repeat="image in boat_images" ng-src="{{image.image}}" ng-click="showImages($index)"/>
+                        </a>
+                        </div>
+                        <div style="color:#666; padding-top:8px" class="hide" id="noImagesID">
+                            {{"noimages" | translate}}
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar align-title="left" style="background-color:#377BB5; background-image: none; border-top: 1px solid #ddd;">
+        <h1 class="title" style="color: #fff"ng-click="enterEmail()">I'm on board!</h1>
+    </ion-footer-bar>
+</ion-view>

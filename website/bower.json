@@ -1,0 +1,19 @@
+{
+  "name": "hopWave_01",
+  "version": "0.0.0",
+  "authors": [
+    "George Pilpilidis <fraudaroulis@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4",
+    "fontawesome": "~4.3.0"
+  }
+}

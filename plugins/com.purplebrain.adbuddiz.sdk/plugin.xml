@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="com.purplebrain.adbuddiz.sdk" version="3.0.14">
+        <name>AdBuddizSDK</name>
+        <description>AdBuddiz SDK for PhoneGap/Cordova</description>
+        <keywords>adbuddiz</keywords>
+
+        <dependency id="org.apache.cordova.device" />
+
+        <js-module src="www/adbuddizbridge.js" name="AdBuddizBridge" />
+        <js-module src="www/adbuddiz.js" name="AdBuddiz">
+            <clobbers target="adbuddiz" />
+        </js-module>
+
+        <platform name="android">
+            <!-- Configuration of classes used to bind our Javascript SDK calls to Java SDK calls -->
+            <config-file target="config.xml" parent="/*">
+                <feature name="AdBuddizBridge">
+                    <param name="android-package" value="com.purplebrain.adbuddiz.sdk.AdBuddizBridge"/>
+                </feature>
+            </config-file>
+
+            <!-- Modification made to the AndroidManifest.xml when applying this plugin -->
+            <config-file target="AndroidManifest.xml" parent="/manifest/application">
+                <activity android:name="com.purplebrain.adbuddiz.sdk.AdBuddizActivity" android:theme="@android:style/Theme.Translucent" />
+            </config-file>
+            <config-file target="AndroidManifest.xml" parent="/manifest">
+                <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            </config-file>
+
+            <source-file src="src/android/AdBuddizBridge.java" target-dir="src/com/purplebrain/adbuddiz/sdk" />
+            <source-file src="libs/android/AdBuddiz-3.0.14.jar" target-dir="libs" />
+        </platform>
+
+        <platform name="ios">
+            <!-- Configuration of classes used to bind our Javascript SDK calls to Objective-C SDK calls -->
+            <config-file target="config.xml" parent="/*">
+                <feature name="AdBuddizBridge">
+                    <param name="ios-package" value="AdBuddizBridge"/>
+                </feature>
+            </config-file>
+
+            <header-file src="src/ios/AdBuddizBridge.h" />
+            <header-file src="src/ios/ContextAwareAdBuddizDelegate.h" />
+            <source-file src="src/ios/AdBuddizBridge.m" />
+            <source-file src="src/ios/ContextAwareAdBuddizDelegate.m" />
+
+            <framework src="AdSupport.framework" />
+            <framework src="Foundation.framework" />
+            <framework src="UIKit.framework" />
+            <framework src="StoreKit.framework" />
+            <framework src="SystemConfiguration.framework" />
+            <framework src="libs/ios/AdBuddiz.framework" custom="true" />
+        </platform>
+    </plugin>

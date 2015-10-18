@@ -1,0 +1,14 @@
+{
+    "version": "3.0.14",
+    "name": "com.purplebrain.adbuddiz.sdk",
+    "cordova_name": "AdBuddizSDK",
+    "description": "AdBuddiz SDK for PhoneGap/Cordova",
+    "keywords": [
+        "adbuddiz"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": []
+}

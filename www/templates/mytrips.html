@@ -1,0 +1,36 @@
+<ion-nav-bar>
+    <ion-nav-buttons side="left">
+        <a class="button button-clear button-dark" menu-close href="#/trip/search"><i class="ion-android-arrow-back"></i> {{"back" | translate}}</a>
+        <h1 class="title" style="text-align: center !important">{{"mytrips" | translate}}</h1>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-view id="trip-results" title="mytrips">
+    <ion-content class="has-header" scroll="true">
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list ng-if="isLocalStorageEmpty()">
+            <ion-item item="trip" class="item-thumbnail-left" ng-repeat="trip in trips track by $index" ng-click="goTo('/mytrip/mytripdetails', $index)">
+                <img src={{trip.boat_thumbnail_image}}>
+
+                <h3 ng-if="getLanguage()" style="white-space:normal">{{ trip.en.route_title }}</h3>
+                <h3 ng-if="!getLanguage()" style="white-space:normal">{{ trip.gr.route_title }}</h3>
+
+                <p ng-if="getLanguage()"><i style="font-size:15px; margin-left:7px" class="icon ion-information"></i><span style="margin-left:8px">{{trip.boat_name}}</span></p>
+
+                <img width="15px" height="14px" style="margin-left:1px; border-radius: 0px;" src="img/myRepeat.png"/>
+                <p class="times" style="margin-bottom:0px"><span>{{trip.route_time_departure}} - {{trip.route_time_arrival}}</span></p>
+
+                <p ng-if="getLanguage()" style="height:15px; padding-left: 1px;"><i style="font-size:15px; margin-left:1px;" class="icon ion-android-boat"></i><span> {{trip.boat_type}}</p>
+
+                <p id="starting_point"><i style="font-size:15px; margin-left:-1px" class="icon ion-calendar"></i> {{fixDate(trip)}}</strong></p>
+
+                <p class="price"><i class="icon ion-social-euro"></i> {{trip.boat_trip_price}} <small>{{trip.boat_trip_price_secondary}}</small></p>
+                <p><button id="forwardButton"><i class="icon ion-ios-arrow-forward"></i></button></p>
+            </ion-item>
+        </ion-list>
+        <div ng-if="!isLocalStorageEmpty()" style="padding:8px">
+            <p>{{"emptystorage"|translate}}</p>
+        </div>
+    </ion-content>
+</ion-view>
